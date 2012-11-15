@@ -1,0 +1,39 @@
+This is a Python wrapper to libcangjie, the library implementing Cangjie and
+Quick input methods.
+
+The libcangjie source code itself is available too:
+    https://github.com/wanleung/libcangjie/
+
+Getting the source code
+=======================
+
+The Git sources are available at the following address:
+    https://github.com/bochecha/pycangjie
+
+Installing
+==========
+
+This is pretty much a standard Autotools project. You can install it with the
+usual sequence::
+
+    $ ./configure
+    $ make
+    # make install
+
+Of course, if you got the sources from Git, you will need to run the
+``autogen.sh`` script first.
+
+The bindings should work with Python 2 or 3. The default is Python 2, and you
+can build with Python 3 instead by passing the appropriate option to the
+``configure`` script::
+
+    $ configure --enable-python3
+
+Legal
+=====
+
+This software is released under the terms of the GNU Lesser General Public
+License (LGPL) version 3 or any later version.
+
+We won't ask you to sign a copyright assignment or any other long and tedious
+legal document, so just send us your patches!
