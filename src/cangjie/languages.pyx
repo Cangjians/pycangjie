@@ -18,14 +18,8 @@
 cimport _core
 
 
-# Make the class available in the Python module
-cdef class CangJie:
-    cdef _core.CppCangJie* cobj
-
-    def __init__(self, _core.CangJie_Version_Type version, uint32_t flags):
-        self.cobj = new _core.CppCangJie(version, flags)
-        if self.cobj == NULL:
-            raise MemoryError('Not enough memory.')
-
-    def getCharacters(self, string code):
-        return self.cobj.getCharacters(code)
+# Make the filter flags available in the Python module
+SIMPLIFIED = _core.CANGJIE_SIMPLIFIED
+TRADITIONAL = _core.CANGJIE_TRADITIONAL
+COMMON = _core.CANGJIE_COMMON
+ALL_CJK = _core.CANGJIE_ALL_CJK
