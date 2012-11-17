@@ -15,27 +15,27 @@
 # You should have received a copy of the GNU General Public License
 # along with pycangjie.  If not, see <http://www.gnu.org/licenses/>.
 
-cimport cangjie
+cimport _core
 
 
 # Make the filter flags available in the Python module
-SIMPLIFIED = cangjie.CANGJIE_SIMPLIFIED
-TRADITIONAL = cangjie.CANGJIE_TRADITIONAL
-COMMON = cangjie.CANGJIE_COMMON
-ALL_CJK = cangjie.CANGJIE_ALL_CJK
+SIMPLIFIED = _core.CANGJIE_SIMPLIFIED
+TRADITIONAL = _core.CANGJIE_TRADITIONAL
+COMMON = _core.CANGJIE_COMMON
+ALL_CJK = _core.CANGJIE_ALL_CJK
 
 
 # Make the version constants available in the Python module
-VERSION_3 = cangjie.CangJie_Version_Type_3
-VERSION_5 = cangjie.CangJie_Version_Type_5
+VERSION_3 = _core.CangJie_Version_Type_3
+VERSION_5 = _core.CangJie_Version_Type_5
 
 
 # Make the class available in the Python module
 cdef class CangJie:
-    cdef cangjie.CppCangJie* cobj
+    cdef _core.CppCangJie* cobj
 
-    def __init__(self, cangjie.CangJie_Version_Type version, uint32_t flags):
-        self.cobj = new cangjie.CppCangJie(version, flags)
+    def __init__(self, _core.CangJie_Version_Type version, uint32_t flags):
+        self.cobj = new _core.CppCangJie(version, flags)
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
 

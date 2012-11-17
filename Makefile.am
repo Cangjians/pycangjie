@@ -2,21 +2,30 @@
 ACLOCAL_AMFLAGS  = -I m4 ${ACLOCAL_FLAGS}
 
 # -- src/ ----------------------------
-pyexec_LTLIBRARIES = cangjie.la
-cangjie_la_SOURCES = \
-	src/cangjie.cpp \
+cangjie_PYTHON = \
+	src/cangjie/__init__.py \
 	$(NULL)
-cangjie_la_CXXFLAGS = $(LIBCANGJIE_CFLAGS) $(PYTHON_INCLUDE)
-cangjie_la_LDFLAGS = -avoid-version -module
-cangjie_la_LIBADD = $(LIBCANGJIE_LIBS)
-cangjie_pyexecdir = $(pyexecdir)
+cangjiedir = $(pkgpyexecdir)
 
-src/cangjie.cpp: src/cangjie.pyx src/cangjie.pxd
-	cython --cplus --verbose src/cangjie.pyx
+pkgpyexec_LTLIBRARIES = \
+	_core.la \
+	$(NULL)
+
+_core_la_SOURCES = \
+	src/cangjie/_core.cpp \
+	$(NULL)
+_core_la_CXXFLAGS = $(LIBCANGJIE_CFLAGS) $(PYTHON_INCLUDE)
+_core_la_LDFLAGS = -avoid-version -module
+_core_la_LIBADD = $(LIBCANGJIE_LIBS)
+
+pkgpyexecdir = $(pyexecdir)/cangjie
+
+src/cangjie/_core.cpp: src/cangjie/_core.pyx src/cangjie/_core.pxd
+	cython --cplus --verbose src/cangjie/_core.pyx
 
 # -- Common --------------------------
 CLEANFILES = \
-	src/cangjie.cpp \
+	src/cangjie/_core.cpp \
 	$(NULL)
 
 EXTRA_DIST = \
