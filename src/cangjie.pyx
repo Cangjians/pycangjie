@@ -18,6 +18,13 @@
 cimport cangjie
 
 
+# Make the filter flags available in the Python module
+SIMPLIFIED = cangjie.CANGJIE_SIMPLIFIED
+TRADITIONAL = cangjie.CANGJIE_TRADITIONAL
+COMMON = cangjie.CANGJIE_COMMON
+ALL_CJK = cangjie.CANGJIE_ALL_CJK
+
+
 # Make the version constants available in the Python module
 VERSION_3 = cangjie.CangJie_Version_Type_3
 VERSION_5 = cangjie.CangJie_Version_Type_5

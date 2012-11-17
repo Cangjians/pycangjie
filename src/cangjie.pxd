@@ -21,6 +21,12 @@ from libcpp.vector cimport vector
 
 
 cdef extern from "cangjie.h":
+    ctypedef enum:
+        CANGJIE_SIMPLIFIED  = 0x00000001
+        CANGJIE_TRADITIONAL = 0x00000010
+        CANGJIE_COMMON      = 0x00000011
+        CANGJIE_ALL_CJK     = 0x00000111
+
     ctypedef enum CangJie_Version_Type:
         CangJie_Version_Type_3
         CangJie_Version_Type_5
