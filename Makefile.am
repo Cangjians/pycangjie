@@ -37,13 +37,13 @@ versions_la_LIBADD = $(LIBCANGJIE_LIBS)
 pkgpyexecdir = $(pyexecdir)/cangjie
 
 src/cangjie/_core.cpp: src/cangjie/_core.pyx src/cangjie/_core.pxd
-	cython --cplus --verbose src/cangjie/_core.pyx
+	cython --cplus -3 --verbose src/cangjie/_core.pyx
 
 src/cangjie/languages.cpp: src/cangjie/languages.pyx src/cangjie/_core.pxd
-	cython --cplus --verbose src/cangjie/languages.pyx
+	cython --cplus -3 --verbose src/cangjie/languages.pyx
 
 src/cangjie/versions.cpp: src/cangjie/versions.pyx src/cangjie/_core.pxd
-	cython --cplus --verbose src/cangjie/versions.pyx
+	cython --cplus -3 --verbose src/cangjie/versions.pyx
 
 # -- Common --------------------------
 CLEANFILES = \

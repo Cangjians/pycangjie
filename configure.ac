@@ -21,7 +21,7 @@ PKG_CHECK_MODULES(LIBCANGJIE, [cangjie])
 
 AC_LANG_POP([C++])
 
-AM_PATH_PYTHON([2.5])
+AM_PATH_PYTHON([3.3])
 AC_PATH_PROGS([PYTHON_CONFIG],
               [python$PYTHON_VERSION-config python-config],
               [no],

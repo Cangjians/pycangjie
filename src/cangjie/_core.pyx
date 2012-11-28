@@ -27,5 +27,6 @@ cdef class CangJie:
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
 
-    def getCharacters(self, string code):
-        return self.cobj.getCharacters(code)
+    def getCharacters(self, unicode code):
+        cdef string c_code = code.encode("utf-8")
+        return self.cobj.getCharacters(c_code)
