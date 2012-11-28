@@ -23,10 +23,22 @@ cdef class CangJie:
     cdef _core.CppCangJie* cobj
 
     def __init__(self, _core.CangJie_Version_Type version, uint32_t flags):
+        """Constructor for the CangJie class
+
+        The `version` parameter must be one of the available constants in
+        the `cangjie.versions` module.
+
+        The `flags` parameter must be one of the available constants in
+        the `cangjie.languages` module.
+        """
         self.cobj = new _core.CppCangJie(version, flags)
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
 
     def getCharacters(self, unicode code):
+        """Return the CJK character corresponding to the `code`
+
+        The `code` parameter must be a unicode string.
+        """
         cdef string c_code = code.encode("utf-8")
         return self.cobj.getCharacters(c_code)
