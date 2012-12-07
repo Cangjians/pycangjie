@@ -42,3 +42,8 @@ cdef class CangJie:
         """
         cdef string c_code = code.encode("utf-8")
         return self.cobj.getCharacters(c_code)
+
+    def isCangJieInputKey(self, unicode c):
+        """Return whether the input `c` is a valid CangJie char"""
+        cdef char c_c = ord(c.encode("utf-8"))
+        return self.cobj.isCangJieInputKey(c_c)

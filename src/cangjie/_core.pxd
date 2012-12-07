@@ -16,6 +16,7 @@
 # along with pycangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 from libc.stdint cimport uint32_t
+from libcpp cimport bool
 from libcpp.string cimport string
 from libcpp.vector cimport vector
 
@@ -34,3 +35,4 @@ cdef extern from "cangjie.h":
     cppclass CppCangJie "CangJie":
         CppCangJie(CangJie_Version_Type, uint32_t)
         vector[string] getCharacters(string)
+        bool isCangJieInputKey(char c)
