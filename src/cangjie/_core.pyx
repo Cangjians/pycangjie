@@ -36,7 +36,7 @@ cdef class CangJie:
             raise MemoryError('Not enough memory.')
 
     def getCharacters(self, unicode code):
-        """Return the CJK character corresponding to the `code`
+        """Return the CJK characters corresponding to the `code`
 
         The `code` parameter must be a unicode string.
         """
