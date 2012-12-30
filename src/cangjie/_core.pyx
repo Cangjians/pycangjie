@@ -41,7 +41,8 @@ cdef class CangJie:
         The `code` parameter must be a unicode string.
         """
         cdef string c_code = code.encode("utf-8")
-        return self.cobj.getCharacters(c_code)
+        return map(lambda x: x.decode("utf-8"),
+                   self.cobj.getCharacters(c_code))
 
     def isCangJieInputKey(self, unicode c):
         """Return whether the input `c` is a valid CangJie char"""
