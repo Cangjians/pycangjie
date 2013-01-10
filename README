@@ -23,6 +23,24 @@ usual sequence::
 Of course, if you got the sources from Git, you will need to run the
 ``autogen.sh`` script first.
 
+Dependencies
+============
+
+To build these bindings, you will need the following:
+
+  - Python >= 3.3
+      -> http://python.org
+
+  - Cython
+      -> http://cython.org/
+
+  - libcangjie
+      -> https://github.com/wanleung/libcangjie
+
+  - a C++ compiler
+      We strongly recomment g++
+      -> http://gcc.gnu.org/
+
 Legal
 =====
 
