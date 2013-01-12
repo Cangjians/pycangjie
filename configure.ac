@@ -21,6 +21,14 @@ PKG_CHECK_MODULES(LIBCANGJIE, [cangjie])
 
 AC_LANG_POP([C++])
 
+# Check for Cython
+AC_PATH_PROGS([CYTHON],
+              [cython3 cython],
+              [no])
+AS_IF([test "$CYTHON" = no], [AC_MSG_ERROR([cannot find cython.])])
+AC_SUBST(CYTHON)
+
+# Check for Python 3
 AM_PATH_PYTHON([3.3])
 AC_PATH_PROGS([PYTHON_CONFIG],
               [python$PYTHON_VERSION-config python-config],
