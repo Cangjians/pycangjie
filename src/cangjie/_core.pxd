@@ -37,4 +37,4 @@ cdef extern from "cangjie.h":
         vector[string] getCharacters(string)
         bool isCangJieInputKey(char)
         string translateInputKeyToCangJie(char)
-        string getFullWidthChar(char)
+        string getFullWidthChar(char) except +
