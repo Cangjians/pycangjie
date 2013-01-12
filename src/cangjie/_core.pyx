@@ -35,7 +35,7 @@ cdef class CangJie:
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
 
-    def getCharacters(self, unicode code):
+    def getCharacters(self, str code):
         """Return the CJK characters corresponding to the `code`
 
         The `code` parameter must be a unicode string.
@@ -44,17 +44,17 @@ cdef class CangJie:
         return map(lambda x: x.decode("utf-8"),
                    self.cobj.getCharacters(c_code))
 
-    def isCangJieInputKey(self, unicode c):
+    def isCangJieInputKey(self, str c):
         """Return whether the input `c` is a valid CangJie char"""
         cdef char c_c = ord(c.encode("utf-8"))
         return self.cobj.isCangJieInputKey(c_c)
 
-    def translateInputKeyToCangJie(self, unicode c):
+    def translateInputKeyToCangJie(self, str c):
         """Return the CangJie representation (radical) of an input char."""
         cdef char c_c = ord(c.encode("utf-8"))
         return self.cobj.translateInputKeyToCangJie(c_c).decode("utf-8")
 
-    def getFullWidthChar(self, unicode c):
+    def getFullWidthChar(self, str c):
         """Return the full-width version of a character."""
         cdef char c_c = ord(c.encode("utf-8"))
         return self.cobj.getFullWidthChar(c_c).decode("utf-8")
