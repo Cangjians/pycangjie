@@ -53,3 +53,8 @@ cdef class CangJie:
         """Return the CangJie representation (radical) of an input char."""
         cdef char c_c = ord(c.encode("utf-8"))
         return self.cobj.translateInputKeyToCangJie(c_c).decode("utf-8")
+
+    def getFullWidthChar(self, unicode c):
+        """Return the full-width version of a character."""
+        cdef char c_c = ord(c.encode("utf-8"))
+        return self.cobj.getFullWidthChar(c_c).decode("utf-8")
