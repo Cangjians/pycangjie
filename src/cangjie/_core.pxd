@@ -35,5 +35,5 @@ cdef extern from "cangjie.h":
     cppclass CppCangJie "CangJie":
         CppCangJie(CangJie_Version_Type, uint32_t)
         vector[string] getCharacters(string)
-        bool isCangJieInputKey(char c)
-        string translateInputKeyToCangJie(char c)
+        bool isCangJieInputKey(char)
+        string translateInputKeyToCangJie(char)
