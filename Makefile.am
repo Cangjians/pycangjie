@@ -54,6 +54,10 @@ CLEANFILES = \
 
 EXTRA_DIST = \
 	autogen.sh \
+	src/cangjie/_core.pyx \
+	src/cangjie/_core.pxd \
+	src/cangjie/languages.pyx \
+	src/cangjie/versions.pyx \
 	$(NULL)
 
 TESTS = \
