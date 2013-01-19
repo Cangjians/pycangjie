@@ -29,7 +29,7 @@ AS_IF([test "$CYTHON" = no], [AC_MSG_ERROR([cannot find cython.])])
 AC_SUBST(CYTHON)
 
 # Check for Python 3
-AM_PATH_PYTHON([3.3])
+AM_PATH_PYTHON([3.2.3])
 AC_PATH_PROGS([PYTHON_CONFIG],
               [python$PYTHON_VERSION-config python-config],
               [no],
