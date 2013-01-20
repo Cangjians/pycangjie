@@ -21,13 +21,6 @@ PKG_CHECK_MODULES(LIBCANGJIE, [cangjie])
 
 AC_LANG_POP([C++])
 
-# Check for Cython
-AC_PATH_PROGS([CYTHON],
-              [cython3 cython],
-              [no])
-AS_IF([test "$CYTHON" = no], [AC_MSG_ERROR([cannot find cython.])])
-AC_SUBST(CYTHON)
-
 # Check for Python 3
 AM_PATH_PYTHON([3.2.3])
 AC_PATH_PROGS([PYTHON_CONFIG],
@@ -39,6 +32,13 @@ AC_MSG_CHECKING([python include flags])
 PYTHON_INCLUDE=`$PYTHON_CONFIG --includes`
 AC_MSG_RESULT([$PYTHON_INCLUDE])
 AC_SUBST(PYTHON_INCLUDE)
+
+# Check for Cython
+AC_PATH_PROGS([CYTHON],
+              [cython3 cython],
+              [no])
+AS_IF([test "$CYTHON" = no], [AC_MSG_ERROR([cannot find cython.])])
+AC_SUBST(CYTHON)
 
 # OUTPUT files
 AC_CONFIG_FILES([
