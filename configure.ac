@@ -40,7 +40,7 @@ AC_PATH_PROGS([CYTHON],
 AS_IF([test "$CYTHON" = no], [AC_MSG_ERROR([cannot find cython.])])
 
 # Check for Cython version
-CYTHON_MIN_VERSION=0.17.3
+CYTHON_MIN_VERSION=0.17
 AC_MSG_CHECKING(for cython version)
 CYTHON_VERSION=`$CYTHON --version 2>&1 | cut -d" " -f3`
 AC_MSG_RESULT($CYTHON_VERSION)
