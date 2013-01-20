@@ -33,11 +33,20 @@ PYTHON_INCLUDE=`$PYTHON_CONFIG --includes`
 AC_MSG_RESULT([$PYTHON_INCLUDE])
 AC_SUBST(PYTHON_INCLUDE)
 
-# Check for Cython
+# Check for Cython presence
 AC_PATH_PROGS([CYTHON],
               [cython3 cython],
               [no])
 AS_IF([test "$CYTHON" = no], [AC_MSG_ERROR([cannot find cython.])])
+
+# Check for Cython version
+CYTHON_MIN_VERSION=0.17.3
+AC_MSG_CHECKING(for cython version)
+CYTHON_VERSION=`$CYTHON --version 2>&1 | cut -d" " -f3`
+AC_MSG_RESULT($CYTHON_VERSION)
+$PYTHON -c "from distutils.version import StrictVersion as ver; import sys; sys.exit(0 if ver(\"$CYTHON_VERSION\") >= ver(\"$CYTHON_MIN_VERSION\") else 1)"
+AS_IF([test $? = 1], [AC_MSG_ERROR([Please use cython >= $CYTHON_MIN_VERSION])])
+
 AC_SUBST(CYTHON)
 
 # OUTPUT files
