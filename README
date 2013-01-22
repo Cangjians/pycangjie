@@ -32,10 +32,10 @@ Dependencies
 
 To build these bindings, you will need the following:
 
-  - Python >= 3.3
+  - Python >= 3.2
       -> http://python.org
 
-  - Cython
+  - Cython >= 0.17
       -> http://cython.org/
 
   - libcangjie
