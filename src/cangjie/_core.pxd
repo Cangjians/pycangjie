@@ -23,6 +23,23 @@ from libcpp.vector cimport vector
 
 cdef extern from "cangjie.h":
     ctypedef enum:
+        CHCHAR_SIMPLIFIED  = 0x00000001
+        CHCHAR_TRADITIONAL = 0x00000010
+        CHCHAR_BOTH        = 0x00000011
+        CHCHAR_OTHER       = 0x00000000
+
+    cdef cppclass CppChChar "ChChar":
+        CppChChar(string chchar, uint32_t type, uint32_t order)
+        string chchar()
+        uint32_t type()
+        uint32_t order()
+        uint32_t frequency()
+        string code()
+
+        void set_frequency(uint32_t frequency)
+        void set_code(string code)
+
+    ctypedef enum:
         CANGJIE_SIMPLIFIED  = 0x00000001
         CANGJIE_TRADITIONAL = 0x00000010
         CANGJIE_COMMON      = 0x00000011
@@ -34,7 +51,7 @@ cdef extern from "cangjie.h":
 
     cdef cppclass CppCangJie "CangJie":
         CppCangJie(CangJie_Version_Type, uint32_t)
-        vector[string] getCharacters(string)
+        vector[CppChChar] getCharacters(string)
         bool isCangJieInputKey(char)
         string translateInputKeyToCangJie(char)
         string getFullWidthChar(char) except +

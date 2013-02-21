@@ -15,10 +15,42 @@
 # You should have received a copy of the GNU General Public License
 # along with pycangjie.  If not, see <http://www.gnu.org/licenses/>.
 
+from cython.operator cimport preincrement as inc, dereference as deref
+
 cimport _core
 
 
-# Make the class available in the Python module
+cdef class ChChar:
+    cdef _core.CppChChar* cobj
+
+    def __init__(self, string chchar, uint32_t type, uint32_t order):
+        self.cobj = new _core.CppChChar(chchar, type, order)
+        if self.cobj == NULL:
+            raise MemoryError('Not enough memory.')
+
+    @property
+    def chchar(self):
+        return self.cobj.chchar().decode("utf-8")
+
+    @property
+    def code(self):
+        return self.cobj.code().decode("utf-8")
+
+    def set_code(self, string code):
+        self.cobj.set_code(code)
+
+    @property
+    def frequency(self):
+        return self.cobj.frequency()
+
+    def set_frequency(self, uint32_t frequency):
+        self.cobj.set_frequency(frequency)
+
+    @property
+    def type(self):
+        return self.cobj.type()
+
+
 cdef class CangJie:
     cdef _core.CppCangJie* cobj
 
@@ -35,11 +67,31 @@ cdef class CangJie:
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
 
+    cdef __iterate_chars(self, vector[CppChChar] v):
+        cdef CppChChar *cppchchar_ptr
+        cdef vector[CppChChar].iterator iter = v.begin()
+        cdef vector[CppChChar].iterator end = v.end()
+
+        result = []
+
+        while iter < end:
+            cppchchar_ptr = &deref(iter)
+
+            chchar = ChChar(cppchchar_ptr.chchar(), cppchchar_ptr.type(),
+                            cppchchar_ptr.order())
+            chchar.set_code(cppchchar_ptr.code())
+            chchar.set_frequency(cppchchar_ptr.frequency())
+            result.append(chchar)
+
+            inc(iter)
+
+        return result
+
     def getCharacters(self, str code):
         """Return the CJK characters corresponding to the `code`"""
         cdef string c_code = code.encode("utf-8")
-        return map(lambda x: x.decode("utf-8"),
-                   self.cobj.getCharacters(c_code))
+        cdef vector[CppChChar] v = self.cobj.getCharacters(c_code)
+        return self.__iterate_chars(v)
 
     def isCangJieInputKey(self, str c):
         """Return whether the input `c` is a valid CangJie char"""
