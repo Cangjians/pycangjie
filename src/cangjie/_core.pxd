@@ -32,7 +32,7 @@ cdef extern from "cangjie.h":
         CangJie_Version_Type_3
         CangJie_Version_Type_5
 
-    cppclass CppCangJie "CangJie":
+    cdef cppclass CppCangJie "CangJie":
         CppCangJie(CangJie_Version_Type, uint32_t)
         vector[string] getCharacters(string)
         bool isCangJieInputKey(char)
