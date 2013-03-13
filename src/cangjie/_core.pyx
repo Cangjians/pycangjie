@@ -32,19 +32,17 @@ cdef class ChChar:
     def chchar(self):
         return self.cobj.chchar().decode("utf-8")
 
-    @property
-    def code(self):
+    def get_code(self):
         return self.cobj.code().decode("utf-8")
-
     def set_code(self, string code):
         self.cobj.set_code(code)
+    code = property(get_code, set_code)
 
-    @property
-    def frequency(self):
+    def get_frequency(self):
         return self.cobj.frequency()
-
     def set_frequency(self, uint32_t frequency):
         self.cobj.set_frequency(frequency)
+    frequency = property(get_frequency, set_frequency)
 
     @property
     def type(self):
