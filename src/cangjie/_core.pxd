@@ -34,9 +34,11 @@ cdef extern from "cangjie.h":
         uint32_t type()
         uint32_t order()
         uint32_t frequency()
+        uint32_t classic_frequency()
         string code()
 
         void set_frequency(uint32_t frequency)
+        void set_classic_frequency(uint32_t frequency)
         void set_code(string code)
 
     ctypedef enum:

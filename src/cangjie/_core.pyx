@@ -44,6 +44,12 @@ cdef class ChChar:
         self.cobj.set_frequency(frequency)
     frequency = property(get_frequency, set_frequency)
 
+    def get_classic_frequency(self):
+        return self.cobj.classic_frequency()
+    def set_classic_frequency(self, uint32_t frequency):
+        self.cobj.set_classic_frequency(frequency)
+    classic_frequency = property(get_classic_frequency, set_classic_frequency)
+
     @property
     def type(self):
         return self.cobj.type()
@@ -79,6 +85,7 @@ cdef class CangJie:
                             cppchchar_ptr.order())
             chchar.set_code(cppchchar_ptr.code())
             chchar.set_frequency(cppchchar_ptr.frequency())
+            chchar.set_classic_frequency(cppchchar_ptr.classic_frequency())
             result.append(chchar)
 
             inc(iter)
