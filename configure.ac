@@ -17,7 +17,7 @@ AC_LANG_PUSH([C++])
 LT_INIT([disable-static])
 
 # Check for libcangjie
-PKG_CHECK_MODULES(LIBCANGJIE, [cangjie])
+PKG_CHECK_MODULES(LIBCANGJIE, [cangjie >= 0.0.1])
 
 AC_LANG_POP([C++])
 
