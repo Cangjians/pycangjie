@@ -9,22 +9,22 @@ import unittest
 
 
 # -- Make sure we test the development tree ----------------------------------
-sys.path.insert(0, "@SRCDIR@")
-
-dst = os.path.join("@SRCDIR@", "built_cangjie")
+dst = os.path.join("@BUILDDIR@", "built_cangjie")
 if os.path.exists(dst):
     shutil.rmtree(dst)
 os.mkdir(dst)
 for f in glob.glob(os.path.join("@SRCDIR@", "src", "cangjie", "*.py")):
     shutil.copy2(f, dst)
-for f in glob.glob(os.path.join("@SRCDIR@", ".libs", "*.so")):
+for f in glob.glob(os.path.join("@BUILDDIR@", ".libs", "*.so")):
     shutil.copy2(f, dst)
 
+sys.path.insert(0, "@BUILDDIR@")
 import built_cangjie
 sys.modules["cangjie"] = built_cangjie
 
 
 # -- Load and run our unit tests ---------------------------------------------
+sys.path.insert(1, "@SRCDIR@")
 loader = unittest.TestLoader()
 suite = loader.discover("@SRCDIR@/tests")
 runner = unittest.TextTestRunner(verbosity=2)
