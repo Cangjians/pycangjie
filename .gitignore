@@ -2,6 +2,8 @@
 *.slo
 *.lo
 *.o
+*.pyc
+*.pyo
 
 # Compiled Dynamic libraries
 *.so
@@ -35,5 +37,9 @@ missing
 py-compile
 stamp-h1
 test-driver
+test-suite.log
+tests/*.log
+tests/*.trs
+tests/run_tests
 .deps
 .libs

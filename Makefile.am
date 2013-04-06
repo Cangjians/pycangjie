@@ -48,11 +48,21 @@ src/cangjie/versions.cpp: src/cangjie/versions.pyx src/cangjie/_core.pxd
 	$(MKDIR_P) src/cangjie
 	$(CYTHON) --cplus -3 --verbose -o $@ $(srcdir)/src/cangjie/versions.pyx
 
+# -- Testing -------------------------
+TESTS = tests/run_tests
+
+tests/run_tests: tests/run_tests.in
+	$(MKDIR_P) tests
+	sed -e 's&@PYTHON_BIN@&$(PYTHON)&g' \
+	    -e 's&@SRCDIR@&$(srcdir)&g' $< > $@
+	chmod +x $@
+
 # -- Common --------------------------
 CLEANFILES = \
 	src/cangjie/_core.cpp \
 	src/cangjie/languages.cpp \
 	src/cangjie/versions.cpp \
+	tests/run_tests \
 	$(NULL)
 
 EXTRA_DIST = \
@@ -61,7 +71,7 @@ EXTRA_DIST = \
 	src/cangjie/_core.pxd \
 	src/cangjie/languages.pyx \
 	src/cangjie/versions.pyx \
-	$(NULL)
-
-TESTS = \
+	tests/run_tests.in \
+	tests/__init__.py \
+	$(wildcard $(srcdir)/tests/test_*.py) \
 	$(NULL)

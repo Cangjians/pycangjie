@@ -1,0 +1,40 @@
+#!@PYTHON_BIN@
+
+
+import glob
+import os
+import shutil
+import sys
+import unittest
+
+
+# -- Make sure we test the development tree ----------------------------------
+sys.path.insert(0, "@SRCDIR@")
+
+dst = os.path.join("@SRCDIR@", "built_cangjie")
+if os.path.exists(dst):
+    shutil.rmtree(dst)
+os.mkdir(dst)
+for f in glob.glob(os.path.join("@SRCDIR@", "src", "cangjie", "*.py")):
+    shutil.copy2(f, dst)
+for f in glob.glob(os.path.join("@SRCDIR@", ".libs", "*.so")):
+    shutil.copy2(f, dst)
+
+import built_cangjie
+sys.modules["cangjie"] = built_cangjie
+
+
+# -- Load and run our unit tests ---------------------------------------------
+loader = unittest.TestLoader()
+suite = loader.discover("@SRCDIR@/tests")
+runner = unittest.TextTestRunner(verbosity=2)
+result = runner.run(suite)
+
+
+# -- Clean up behind ourselves -----------------------------------------------
+if os.path.exists(dst):
+    shutil.rmtree(dst)
+
+
+if result.failures or result.errors:
+    sys.exit(1)
