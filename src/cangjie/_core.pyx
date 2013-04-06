@@ -23,10 +23,14 @@ cimport _core
 cdef class ChChar:
     cdef _core.CppChChar* cobj
 
-    def __init__(self, string chchar, uint32_t type, uint32_t order):
+    def __cinit__(self, string chchar, uint32_t type, uint32_t order):
         self.cobj = new _core.CppChChar(chchar, type, order)
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
+
+    def __dealloc__(self):
+        if self.cobj is not NULL:
+            del self.cobj
 
     @property
     def chchar(self):
@@ -79,7 +83,7 @@ cdef class ChChar:
 cdef class CangJie:
     cdef _core.CppCangJie* cobj
 
-    def __init__(self, _core.CangJie_Version_Type version, uint32_t flags):
+    def __cinit__(self, _core.CangJie_Version_Type version, uint32_t flags):
         """Constructor for the CangJie class
 
         The `version` parameter must be one of the available constants in
@@ -91,6 +95,10 @@ cdef class CangJie:
         self.cobj = new _core.CppCangJie(version, flags)
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
+
+    def __dealloc__(self):
+        if self.cobj is not NULL:
+            del self.cobj
 
     cdef __iterate_chars(self, vector[CppChChar] v):
         cdef CppChChar *cppchchar_ptr
