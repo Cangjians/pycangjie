@@ -24,6 +24,12 @@ cdef class ChChar:
     cdef _core.CppChChar* cobj
 
     def __cinit__(self, string chchar, uint32_t type, uint32_t order):
+        # There seems to be a bug in Python, where it doesn't know some valid
+        # UTF-8 sequences (see the unit tests for an example of it).
+        # So let's try here first, so that we fail earlier rather than later,
+        # in weird ways which would be painful to debug.
+        chchar.decode("utf-8")
+
         self.cobj = new _core.CppChChar(chchar, type, order)
         if self.cobj == NULL:
             raise MemoryError('Not enough memory.')
@@ -110,12 +116,17 @@ cdef class CangJie:
         while iter < end:
             cppchchar_ptr = &deref(iter)
 
-            chchar = ChChar(cppchchar_ptr.chchar(), cppchchar_ptr.type(),
-                            cppchchar_ptr.order())
-            chchar.set_code(cppchchar_ptr.code())
-            chchar.set_frequency(cppchchar_ptr.frequency())
-            chchar.set_classic_frequency(cppchchar_ptr.classic_frequency())
-            result.append(chchar)
+            try:
+                chchar = ChChar(cppchchar_ptr.chchar(), cppchchar_ptr.type(),
+                                cppchchar_ptr.order())
+                chchar.set_code(cppchchar_ptr.code())
+                chchar.set_frequency(cppchchar_ptr.frequency())
+                chchar.set_classic_frequency(cppchchar_ptr.classic_frequency())
+                result.append(chchar)
+
+            except UnicodeDecodeError:
+                # Python's UTF-8 codec doesn't like this chchar :(
+                pass
 
             inc(iter)
 
