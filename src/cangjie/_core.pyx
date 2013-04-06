@@ -60,6 +60,21 @@ cdef class ChChar:
                 % (self.code, self.chchar, self.frequency,
                    self.classic_frequency, self.type))
 
+    def __richcmp__(self, other, op):
+        equality = (self.code == other.code
+                and self.chchar == other.chchar
+                and self.frequency == other.frequency
+                and self.classic_frequency == other.classic_frequency
+                and self.type == other.type)
+
+        if op == 2:
+            return equality
+
+        if op == 3:
+            return not equality
+
+        raise NotImplementedError("Only (in)equality is implemented")
+
 
 cdef class CangJie:
     cdef _core.CppCangJie* cobj
