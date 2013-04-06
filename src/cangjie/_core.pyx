@@ -54,6 +54,12 @@ cdef class ChChar:
     def type(self):
         return self.cobj.type()
 
+    def __str__(self):
+        return ("<ChChar code='%s', chchar='%s', frequency='%s',"
+                " classic_frequency='%s', type='%s'>"
+                % (self.code, self.chchar, self.frequency,
+                   self.classic_frequency, self.type))
+
 
 cdef class CangJie:
     cdef _core.CppCangJie* cobj
