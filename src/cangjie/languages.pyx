@@ -1,4 +1,4 @@
-# Copyright (c) 2012 - The pycangjie authors
+# Copyright (c) 2012-2013 - The pycangjie authors
 #
 # This file is part of pycangjie, the Python bindings to libcangjie.
 #
