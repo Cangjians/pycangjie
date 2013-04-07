@@ -43,3 +43,4 @@ tests/*.trs
 tests/run_tests
 .deps
 .libs
+AUTHORS
