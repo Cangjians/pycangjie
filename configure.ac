@@ -9,17 +9,11 @@ AC_PROG_MKDIR_P
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-# Needed to build C++ and check for deps
-AC_PROG_CXX
-AC_LANG_PUSH([C++])
-
 # Initialize libtool
 LT_INIT([disable-static])
 
 # Check for libcangjie
-PKG_CHECK_MODULES(LIBCANGJIE, [cangjie >= 0.0.1])
-
-AC_LANG_POP([C++])
+PKG_CHECK_MODULES(LIBCANGJIE, [cangjie2 >= 0.0.0])
 
 # Check for Python 3
 AM_PATH_PYTHON([3.2.3])

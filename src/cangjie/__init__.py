@@ -20,5 +20,5 @@
 from ._core import *
 
 # Native extentions don't get exposed automatically
-from . import languages
+from . import filters
 from . import versions

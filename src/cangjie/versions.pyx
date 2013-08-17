@@ -19,5 +19,5 @@ cimport _core
 
 
 # Make the version constants available in the Python module
-CANGJIE3 = _core.CangJie_Version_Type_3
-CANGJIE5 = _core.CangJie_Version_Type_5
+CANGJIE3 = _core.CANGJIE_VERSION_3
+CANGJIE5 = _core.CANGJIE_VERSION_5

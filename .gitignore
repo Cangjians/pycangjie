@@ -14,7 +14,7 @@
 *.a
 
 # Generated source code
-*.cpp
+*.c
 
 # Autotools stuff
 Makefile
