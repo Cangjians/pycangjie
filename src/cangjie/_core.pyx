@@ -93,6 +93,17 @@ cdef class Cangjie:
     def version(self):
         return self.cobj.version
 
+    def get_characters(self, str code):
+        l = CangjieCharList()
+        b_code = code.encode("utf-8")
+
+        ret = <int>_core.cangjie_get_characters(self.cobj, b_code, &l.cobj)
+        if ret != 0:
+            # TODO: Exception handling
+            pass
+
+        return list(l)
+
     def __dealloc__(self):
         if self.cobj is not NULL:
             _core.cangjie_free(self.cobj)

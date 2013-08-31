@@ -66,4 +66,8 @@ cdef extern from "cangjie.h":
                     CangjieVersion   version,
                     CangjieFilter    filter_flags)
 
+    int cangjie_get_characters(CCangjie         *cj,
+                               char              *code,
+                               CCangjieCharList **l)
+
     int cangjie_free(CCangjie *cj)
