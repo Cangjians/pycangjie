@@ -71,6 +71,9 @@ cdef class CangjieCharList:
 
     def __iter__(self):
         cdef _core.CCangjieCharList *iter_ = self.cobj
+        if self.cobj == NULL:
+            raise StopIteration()
+
         while True:
             c = iter_.c
             yield CangjieChar(c.chchar, c.code, c.frequency)
