@@ -50,6 +50,14 @@ cdef extern from "cangjie.h":
     int cangjie_char_free(CCangjieChar *c)
 
 
+    cdef struct CCangjieCharList "CangjieCharList":
+        CCangjieChar     *c
+        CCangjieCharList *prev
+        CCangjieCharList *next
+
+    int cangjie_char_list_free(CCangjieCharList *l)
+
+
     cdef struct CCangjie "Cangjie":
         uint32_t version
         uint32_t filter_flags

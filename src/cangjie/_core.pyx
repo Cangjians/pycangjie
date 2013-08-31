@@ -46,6 +46,28 @@ cdef class CangjieChar:
             _core.cangjie_char_free(self.cobj)
 
 
+cdef class CangjieCharList:
+    cdef _core.CCangjieCharList *cobj
+
+    def __cinit__(self):
+        self.cobj = NULL
+
+    def __iter__(self):
+        cdef _core.CCangjieCharList *iter_ = self.cobj
+        while True:
+            c = iter_.c
+            yield CangjieChar(c.chchar, c.code, c.frequency)
+
+            if iter_.next == NULL:
+                break
+
+            iter_ = iter_.next
+
+    def __dealloc__(self):
+        if self.cobj is not NULL:
+            _core.cangjie_char_list_free(self.cobj)
+
+
 cdef class Cangjie:
     cdef _core.CCangjie *cobj
 
