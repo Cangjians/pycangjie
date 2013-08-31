@@ -70,4 +70,8 @@ cdef extern from "cangjie.h":
                                char              *code,
                                CCangjieCharList **l)
 
+    int cangjie_get_radical(CCangjie    *cj,
+                            const char   key,
+                            const char **radical)
+
     int cangjie_free(CCangjie *cj)

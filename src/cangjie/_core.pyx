@@ -104,6 +104,24 @@ cdef class Cangjie:
 
         return list(l)
 
+    def get_radical(self, str key):
+        b_key = key.encode("utf-8")
+        if len(b_key) > 1:
+            # TODO: Exception handling
+            pass
+
+        # A char is in fact an integer in C
+        b_key = ord(b_key)
+
+        cdef const char *radical
+
+        ret = <int>_core.cangjie_get_radical(self.cobj, b_key, &radical)
+        if ret != 0:
+            # TODO: Exception handling
+            pass
+
+        return (<bytes>radical).decode("utf-8")
+
     def __dealloc__(self):
         if self.cobj is not NULL:
             _core.cangjie_free(self.cobj)
