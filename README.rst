@@ -8,9 +8,11 @@ Below is a trivial example of how to use it::
     >>> cj = cangjie.Cangjie(cangjie.versions.CANGJIE3,
     ...                      cangjie.filters.BIG5 | cangjie.filters.HKSCS)
     >>> 
-    >>> for c in cj.get_characters("d*d"):
-    ...     print("Char: %s, code: %s, frequency: %d"
-    ...           % (c.chchar, c.code, c.frequency))
+    >>> for c in cj.get_characters("a*y"):
+    ...     print(c)
+    <CangjieChar chchar='晦', code='aowy', frequency'19740'>
+    <CangjieChar chchar='閼', code='anysy', frequency'5497'>
+    <CangjieChar chchar='㫵', code='almy', frequency'0'>
 
 For more details, refer to `the documentation`_.
 
