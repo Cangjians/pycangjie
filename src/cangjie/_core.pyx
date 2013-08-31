@@ -45,6 +45,19 @@ cdef class CangjieChar:
         if self.cobj is not NULL:
             _core.cangjie_char_free(self.cobj)
 
+    def __richcmp__(self, other, op):
+        equality = (self.chchar == other.chchar
+                and self.code == other.code
+                and self.frequency == other.frequency)
+
+        if op == 2:
+            return equality
+
+        if op == 3:
+            return not equality
+
+        raise NotImplementedError("Only (in)equality is implemented")
+
 
 cdef class CangjieCharList:
     cdef _core.CCangjieCharList *cobj
