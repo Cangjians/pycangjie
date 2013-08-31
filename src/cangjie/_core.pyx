@@ -45,6 +45,10 @@ cdef class CangjieChar:
         if self.cobj is not NULL:
             _core.cangjie_char_free(self.cobj)
 
+    def __str__(self):
+        return ("<CangjieChar chchar='%s', code='%s', frequency='%s'>"
+                % (self.chchar, self.code, self.frequency))
+
     def __richcmp__(self, other, op):
         equality = (self.chchar == other.chchar
                 and self.code == other.code
