@@ -37,6 +37,19 @@ cdef extern from "cangjie.h":
         CANGJIE_FILTER_SYMBOLS
 
 
+    cdef struct CCangjieChar "CangjieChar":
+        char     chchar[5]
+        char     code[6]
+        uint32_t frequency
+
+    int cangjie_char_new(CCangjieChar **c,
+                         char          *chchar,
+                         char          *code,
+                         uint32_t       frequency)
+
+    int cangjie_char_free(CCangjieChar *c)
+
+
     cdef struct CCangjie "Cangjie":
         uint32_t version
         uint32_t filter_flags

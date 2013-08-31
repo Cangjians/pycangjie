@@ -20,6 +20,32 @@
 cimport _core
 
 
+cdef class CangjieChar:
+    cdef _core.CCangjieChar *cobj
+
+    def __cinit__(self, char *chchar, char *code, uint32_t frequency):
+        ret = <int>_core.cangjie_char_new(&self.cobj, chchar, code,
+                                          frequency)
+        if ret != 0:
+            raise MemoryError('Could not allocate memory for a CangjieChar')
+
+    @property
+    def chchar(self):
+        return self.cobj.chchar.decode("utf-8")
+
+    @property
+    def code(self):
+        return self.cobj.code.decode("utf-8")
+
+    @property
+    def frequency(self):
+        return self.cobj.frequency
+
+    def __dealloc__(self):
+        if self.cobj is not NULL:
+            _core.cangjie_char_free(self.cobj)
+
+
 cdef class Cangjie:
     cdef _core.CCangjie *cobj
 
