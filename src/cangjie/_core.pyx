@@ -142,6 +142,19 @@ cdef class Cangjie:
 
         return (<bytes>radical).decode("utf-8")
 
+    def is_input_key(self, str key):
+        b_key = key.encode("utf-8")
+        if len(b_key) > 1:
+            # TODO: Exception handling
+            pass
+
+        # A char is in fact an integer in C
+        b_key = ord(b_key)
+
+        ret = <int>_core.cangjie_is_input_key(self.cobj, b_key)
+
+        return ret == 0
+
     def __dealloc__(self):
         if self.cobj is not NULL:
             _core.cangjie_free(self.cobj)

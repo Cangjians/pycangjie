@@ -74,4 +74,7 @@ cdef extern from "cangjie.h":
                             const char   key,
                             const char **radical)
 
+    int cangjie_is_input_key(CCangjie   *cj,
+                             const char  key)
+
     int cangjie_free(CCangjie *cj)
