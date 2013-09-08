@@ -124,6 +124,19 @@ cdef class Cangjie:
 
         return list(l)
 
+    def get_characters_by_shortcode(self, str code):
+        l = CangjieCharList()
+        b_code = code.encode("utf-8")
+
+        ret = <int>_core.cangjie_get_characters_by_shortcode(self.cobj,
+                                                             b_code,
+                                                             &l.cobj)
+        if ret != 0:
+            # TODO: Exception handling
+            pass
+
+        return list(l)
+
     def get_radical(self, str key):
         b_key = key.encode("utf-8")
         if len(b_key) > 1:

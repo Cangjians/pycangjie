@@ -70,6 +70,10 @@ cdef extern from "cangjie.h":
                                char              *code,
                                CCangjieCharList **l)
 
+    int cangjie_get_characters_by_shortcode(CCangjie         *cj,
+                                            char              *code,
+                                            CCangjieCharList **l)
+
     int cangjie_get_radical(CCangjie    *cj,
                             const char   key,
                             const char **radical)
