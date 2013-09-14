@@ -9,6 +9,7 @@ cangjiedir = $(pkgpyexecdir)
 
 pkgpyexec_LTLIBRARIES = \
 	_core.la \
+	errors.la \
 	filters.la \
 	versions.la \
 	$(NULL)
@@ -20,6 +21,13 @@ nodist__core_la_SOURCES = \
 _core_la_CFLAGS = $(LIBCANGJIE_CFLAGS) $(PYTHON_INCLUDE)
 _core_la_LDFLAGS = -avoid-version -module
 _core_la_LIBADD = $(LIBCANGJIE_LIBS)
+
+nodist_errors_la_SOURCES = \
+	src/cangjie/errors.c \
+	$(NULL)
+errors_la_CFLAGS = $(LIBCANGJIE_CFLAGS) $(PYTHON_INCLUDE)
+errors_la_LDFLAGS = -avoid-version -module
+errors_la_LIBADD = $(LIBCANGJIE_LIBS)
 
 nodist_filters_la_SOURCES = \
 	src/cangjie/filters.c \
@@ -40,6 +48,10 @@ pkgpyexecdir = $(pyexecdir)/cangjie
 src/cangjie/_core.c: src/cangjie/_core.pyx src/cangjie/_core.pxd
 	$(MKDIR_P) src/cangjie
 	$(CYTHON) -3 --verbose -o $@ $(srcdir)/src/cangjie/_core.pyx
+
+src/cangjie/errors.c: src/cangjie/errors.pyx src/cangjie/_core.pxd
+	$(MKDIR_P) src/cangjie
+	$(CYTHON) -3 --verbose -o $@ $(srcdir)/src/cangjie/errors.pyx
 
 src/cangjie/filters.c: src/cangjie/filters.pyx src/cangjie/_core.pxd
 	$(MKDIR_P) src/cangjie
@@ -80,6 +92,7 @@ EXTRA_DIST = \
 	autogen.sh \
 	src/cangjie/_core.pyx \
 	src/cangjie/_core.pxd \
+	src/cangjie/errors.pyx \
 	src/cangjie/filters.pyx \
 	src/cangjie/versions.pyx \
 	tests/run_tests.in \
