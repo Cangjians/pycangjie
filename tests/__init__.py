@@ -42,7 +42,7 @@ class MetaTest(type):
     def __init__(cls, name, bases, dct):
         super(MetaTest, cls).__init__(name, bases, dct)
 
-        def gen_codes(repeat):
+        def gen_codes():
             """Generate the 702 possible input codes"""
             # First, the 1-character codes
             for c in string.ascii_lowercase:
@@ -58,7 +58,7 @@ class MetaTest(type):
             return func
 
         # Generate the test_* methods
-        for code in gen_codes(dct["code_len"]):
+        for code in gen_codes():
             setattr(cls, "test_%s" % code.replace("*", ""), tester(code))
 
 

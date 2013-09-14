@@ -29,4 +29,3 @@ class VersionThreeBig5HKSCSTestCase(BaseTestCase, unittest.TestCase,
     # FIXME: Improve libcangjie2_cli so we can cover other cases
     version = cangjie.versions.CANGJIE3
     language = cangjie.filters.BIG5 | cangjie.filters.HKSCS
-    code_len = 1
