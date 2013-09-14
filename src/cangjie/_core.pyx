@@ -19,6 +19,8 @@
 
 cimport _core
 
+from .errors import CangjieError, CangjieInvalidInputError, handle_error_code
+
 
 cdef class CangjieChar:
     cdef _core.CCangjieChar *cobj
@@ -26,8 +28,10 @@ cdef class CangjieChar:
     def __cinit__(self, char *chchar, char *code, uint32_t frequency):
         ret = <int>_core.cangjie_char_new(&self.cobj, chchar, code,
                                           frequency)
-        if ret != 0:
-            raise MemoryError('Could not allocate memory for a CangjieChar')
+
+        handle_error_code(ret, msg="An unknown error happened while "
+                                   "initializing a CangjieChar object (error "
+                                   "code %d)" % ret)
 
     @property
     def chchar(self):
@@ -102,8 +106,10 @@ cdef class Cangjie:
         the available constants in the `cangjie.filters` module.
         """
         ret = <int>_core.cangjie_new(&self.cobj, version, filter_flags)
-        if ret != 0:
-            raise MemoryError('Could not allocate memory for a Cangjie')
+
+        handle_error_code(ret, msg="An unknown error happened while "
+                                   "initializing a Cangjie object (error code"
+                                   " %d)" % ret)
 
     @property
     def filter_flags(self):
@@ -118,9 +124,10 @@ cdef class Cangjie:
         b_code = code.encode("utf-8")
 
         ret = <int>_core.cangjie_get_characters(self.cobj, b_code, &l.cobj)
-        if ret != 0:
-            # TODO: Exception handling
-            pass
+
+        handle_error_code(ret, msg="An unknown error happened while trying to"
+                                   " get the characters for code '%s' (error "
+                                   "code %d)" % (code, ret))
 
         return list(l)
 
@@ -131,17 +138,17 @@ cdef class Cangjie:
         ret = <int>_core.cangjie_get_characters_by_shortcode(self.cobj,
                                                              b_code,
                                                              &l.cobj)
-        if ret != 0:
-            # TODO: Exception handling
-            pass
+
+        handle_error_code(ret, msg="An unknown error happened while trying to"
+                                   " get the characters for short code '%s' "
+                                   "(error code %d)" % (code, ret))
 
         return list(l)
 
     def get_radical(self, str key):
         b_key = key.encode("utf-8")
         if len(b_key) > 1:
-            # TODO: Exception handling
-            pass
+            raise CangjieInvalidInputError()
 
         # A char is in fact an integer in C
         b_key = ord(b_key)
@@ -149,24 +156,29 @@ cdef class Cangjie:
         cdef const char *radical
 
         ret = <int>_core.cangjie_get_radical(self.cobj, b_key, &radical)
-        if ret != 0:
-            # TODO: Exception handling
-            pass
+
+        handle_error_code(ret, msg="An unknown error happened while trying to"
+                                   " get the radical for code '%s' (error "
+                                   "code %d)" % (key, ret))
 
         return (<bytes>radical).decode("utf-8")
 
     def is_input_key(self, str key):
         b_key = key.encode("utf-8")
         if len(b_key) > 1:
-            # TODO: Exception handling
-            pass
+            raise CangjieInvalidInputError()
 
         # A char is in fact an integer in C
         b_key = ord(b_key)
 
         ret = <int>_core.cangjie_is_input_key(self.cobj, b_key)
 
-        return ret == 0
+        if ret not in (_core.CANGJIE_OK, _core.CANGJIE_INVALID):
+            raise CangjieError("An unknown error happened while checking "
+                               "whether '%s' is a valid input code (error "
+                               "code %d)" % ret)
+
+        return ret == _core.CANGJIE_OK
 
     def __dealloc__(self):
         if self.cobj is not NULL:
