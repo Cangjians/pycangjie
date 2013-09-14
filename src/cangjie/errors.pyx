@@ -16,6 +16,9 @@
 # along with pycangjie.  If not, see <http://www.gnu.org/licenses/>.
 
 
+cimport _core
+
+
 class CangjieError(Exception):
     def __init__(self, *args):
         if args:
@@ -43,3 +46,23 @@ class CangjieMemoryError(CangjieError):
 
 class CangjieInvalidInputError(CangjieError):
     message = "Invalid input"
+
+
+def handle_error_code(int code, msg=None):
+    if code == _core.CANGJIE_NOCHARS:
+        raise CangjieNoCharsError()
+
+    if code == _core.CANGJIE_DBOPEN:
+        raise CangjieDBOpenError()
+
+    if code == _core.CANGJIE_DBERROR:
+        raise CangjieDBError()
+
+    if code == _core.CANGJIE_NOMEM:
+        raise CangjieMemoryError()
+
+    if code == _core.CANGJIE_INVALID:
+        raise CangjieInvalidInputError()
+
+    if code != _core.CANGJIE_OK:
+        raise CangjieError(msg)
