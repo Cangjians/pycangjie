@@ -78,12 +78,14 @@ class BaseTestCase:
                                 stderr=subprocess.PIPE)
         out, err = proc.communicate()
 
-        if proc.returncode:
-            msg = (err if err
-                       else "Unknown error while executing '%s'"
-                            % ' '.join(cmd))
-            raise subprocess.CalledProcessError(proc.returncode, cmd,
-                                                output=msg)
+        try:
+            cangjie.errors.handle_error_code(proc.returncode,
+                                             msg="Unknown error while running"
+                                                 " libcangjie2_cli (%d)"
+                                                 % proc.returncode)
+
+        except cangjie.errors.CangjieNoCharsError:
+            return ""
 
         try:
             return out.decode("utf-8")
@@ -138,8 +140,12 @@ class BaseTestCase:
 
         expected = sorted(expected, key=operator.attrgetter('chchar', 'code'))
 
-        # And compare with what pycangjie produces
-        results = sorted(self.cj.get_characters(input_code),
-                         key=operator.attrgetter('chchar', 'code'))
+        try:
+            # And compare with what pycangjie produces
+            results = sorted(self.cj.get_characters(input_code),
+                             key=operator.attrgetter('chchar', 'code'))
 
-        self.assertEqual(results, expected)
+            self.assertEqual(results, expected)
+
+        except cangjie.errors.CangjieNoCharsError:
+            self.assertEqual(len(expected), 0)
