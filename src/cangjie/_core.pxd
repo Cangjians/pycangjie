@@ -37,6 +37,14 @@ cdef extern from "cangjie.h":
         CANGJIE_FILTER_SYMBOLS
 
 
+    cdef int CANGJIE_OK
+    cdef int CANGJIE_NOCHARS
+    cdef int CANGJIE_DBOPEN
+    cdef int CANGJIE_DBERROR
+    cdef int CANGJIE_NOMEM
+    cdef int CANGJIE_INVALID
+
+
     cdef struct CCangjieChar "CangjieChar":
         char     chchar[5]
         char     code[6]
