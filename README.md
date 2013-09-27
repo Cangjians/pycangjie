@@ -20,8 +20,7 @@ or the one shipped with this software.
 Development happens [on github](https://github.com/Cangjians/pycangjie), and
 stable release tarballs will be available when we reach that point.
 
-Legalities
-==========
+## Legalities
 
 pycangjie is offered under the terms of the
 [GNU Lesser General Public License, either version 3 or any later version](http://www.gnu.org/licenses/lgpl.html).
