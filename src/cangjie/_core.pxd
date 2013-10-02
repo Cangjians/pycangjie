@@ -83,10 +83,10 @@ cdef extern from "cangjie.h":
                                             CCangjieCharList **l)
 
     int cangjie_get_radical(CCangjie    *cj,
-                            const char   key,
-                            const char **radical)
+                            char   key,
+                            char **radical)
 
     int cangjie_is_input_key(CCangjie   *cj,
-                             const char  key)
+                             char  key)
 
     int cangjie_free(CCangjie *cj)
