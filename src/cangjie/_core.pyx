@@ -152,7 +152,7 @@ cdef class Cangjie:
         # A char is in fact an integer in C
         b_key = ord(b_key)
 
-        cdef const char *radical
+        cdef char *radical
 
         ret = <int>_core.cangjie_get_radical(self.cobj, b_key, &radical)
 
