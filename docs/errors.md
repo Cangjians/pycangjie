@@ -9,12 +9,12 @@ sub: doc
 ## Exceptions
 
 pycangjie defines a set of exceptions mapping to the error codes returned by
-the libcangjie2 functions.
+the libcangjie functions.
 
 Functions which are supposed to get you a list of characters will raise
 `CangjieNoCharsError` when no characters correspond to your query.
 
-If the libcangjie2 database could not be opened for some reason, then
+If the libcangjie database could not be opened for some reason, then
 `CangjieDBOpenError` is raised.
 
 If an error happens when querying the database, the method will raise
