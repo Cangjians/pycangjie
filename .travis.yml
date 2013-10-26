@@ -1,0 +1,12 @@
+language: c
+before_install:
+  - sudo apt-get update
+
+  # First install libcangjie
+  - sudo apt-get install libsqlite3-dev
+  - git clone git://github.com/Cangjians/libcangjie
+  - cd libcangjie && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
+  - git clean -dfx
+
+  - sudo apt-get install python3-dev cython
+script: ./autogen.sh && make && make check && make distcheck
