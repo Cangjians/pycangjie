@@ -64,7 +64,7 @@ class MetaTest(type):
 
 class BaseTestCase:
     """Base test class, grouping the common stuff for all our unit tests"""
-    cli_cmd = ["/usr/bin/libcangjie2_cli"]
+    cli_cmd = ["/usr/bin/libcangjie_cli"]
 
     def setUp(self):
         self.cj = cangjie.Cangjie(self.version, self.language)
@@ -81,7 +81,7 @@ class BaseTestCase:
         try:
             cangjie.errors.handle_error_code(proc.returncode,
                                              msg="Unknown error while running"
-                                                 " libcangjie2_cli (%d)"
+                                                 " libcangjie_cli (%d)"
                                                  % proc.returncode)
 
         except cangjie.errors.CangjieNoCharsError:
@@ -109,7 +109,7 @@ class BaseTestCase:
     def run_test(self, input_code):
         """Run the actual test
 
-        This compares the output of the libcangjie2_cli tool with the output
+        This compares the output of the libcangjie_cli tool with the output
         from pycangjie.
 
         The idea is that if pycangjie produces the same results as a C++ tool
@@ -119,9 +119,9 @@ class BaseTestCase:
         validity is to be checked in libcangjie.
 
         Note that this whole test is based on scraping the output of
-        libcangjie2_cli, which is quite fragile.
+        libcangjie_cli, which is quite fragile.
         """
-        # Get a list of CangjieChar from libcangjie2_cli as a reference
+        # Get a list of CangjieChar from libcangjie_cli as a reference
         tmp_expected = self.run_command(self.cli_cmd+[input_code]).split("\n")
         tmp_expected = map(lambda x: x.strip(" \n"), tmp_expected)
         tmp_expected = filter(lambda x: len(x) > 0, tmp_expected)

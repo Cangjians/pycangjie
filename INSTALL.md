@@ -12,7 +12,7 @@ To build these bindings, you will need the following:
 * Python >= 3.2
 * Cython >= 0.17
 * a C compiler and library (we recommend GCC and the GNU C library)
-* the libcangjie2 library and development headers
+* the libcangjie library and development headers
 
 ### Install from a release tarball
 

@@ -13,7 +13,7 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 LT_INIT([disable-static])
 
 # Check for libcangjie
-PKG_CHECK_MODULES(LIBCANGJIE, [cangjie2 >= 0.0.0])
+PKG_CHECK_MODULES(LIBCANGJIE, [cangjie >= 0.0.0])
 
 # Check for Python 3
 AM_PATH_PYTHON([3.2.3])

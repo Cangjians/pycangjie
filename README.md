@@ -1,4 +1,4 @@
-This is a Python wrapper to libcangjie2, the library implementing the Cangjie
+This is a Python wrapper to libcangjie, the library implementing the Cangjie
 input method.
 
 Below is a trivial example of how to use it:
