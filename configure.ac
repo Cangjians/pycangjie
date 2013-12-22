@@ -1,5 +1,5 @@
 AC_PREREQ(2.63)
-AC_INIT([pycangjie], [0.0.1], [https://github.com/bochecha/pycangjie/issues], [cangjie], [https://github.com/bochecha/pycangjie])
+AC_INIT([pycangjie], [1.0], [https://github.com/Cangjians/pycangjie/issues], [cangjie], [https://github.com/Cangjians/pycangjie])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
@@ -13,7 +13,7 @@ m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 LT_INIT([disable-static])
 
 # Check for libcangjie
-PKG_CHECK_MODULES(LIBCANGJIE, [cangjie >= 0.0.0])
+PKG_CHECK_MODULES(LIBCANGJIE, [cangjie >= 1.0])
 
 # Check for Python 3
 AM_PATH_PYTHON([3.2.3])
