@@ -18,7 +18,9 @@ For more details, refer to the documentation, either
 or the one shipped with this software.
 
 Development happens [on github](https://github.com/Cangjians/pycangjie), and
-stable release tarballs will be available when we reach that point.
+stable release tarballs can be found in
+[the download section](http://cangjians.github.io/downloads/pycangjie/) of
+our website.
 
 ## Legalities
 

@@ -91,6 +91,7 @@ CLEANFILES = \
 EXTRA_DIST = \
 	autogen.sh \
 	README.md \
+	$(wildcard docs/*.md) \
 	src/cangjie/_core.pyx \
 	src/cangjie/_core.pxd \
 	src/cangjie/errors.pyx \
