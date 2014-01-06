@@ -88,6 +88,9 @@ CLEANFILES = \
 	tests/run_tests \
 	$(NULL)
 
+clean-local:
+	-rm -rf tests/__pycache__
+
 EXTRA_DIST = \
 	autogen.sh \
 	README.md \
