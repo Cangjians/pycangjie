@@ -1,3 +1,12 @@
+## Debian Unstable / Sid
+
+pycangjie is included in the default Debian repositories, so you can just
+install it with `apt-get`, as the root user:
+
+```
+# apt-get install python3-pycangjie
+```
+
 ## Fedora
 
 pycangjie is included in the default Fedora repositories, so you can just
