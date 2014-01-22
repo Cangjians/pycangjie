@@ -15,6 +15,15 @@ install it with `yum`:
 $ sudo yum install python3-cangjie
 ```
 
+## Ubuntu 14.04
+
+pycangjie is included in the default Ubuntu repositories, **starting with the
+14.04 release**, so you can install it with `apt-get`:
+
+```
+$ sudo apt-get install python3-pycangjie
+```
+
 ## Build from the sources
 
 ### Dependencies
