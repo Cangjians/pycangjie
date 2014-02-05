@@ -44,3 +44,6 @@ tests/run_tests
 .deps
 .libs
 AUTHORS
+
+# Temp editor files
+*.swp
