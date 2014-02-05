@@ -22,7 +22,7 @@ import cangjie
 from tests import BaseTestCase, MetaTest
 
 
-class VersionThreeBig5HKSCSTestCase(BaseTestCase, metaclass=MetaTest):
-    cli_options = ["--filter=big5,hkscs", "--mode=code", "--cj-version=3"]
+class VersionThreeTestCase(BaseTestCase, metaclass=MetaTest):
+    cli_options = ["--filter=big5,hkscs,punctuation,chinese,zhuyin,kanji,katakana,hiragana,symbols",
+                   "--mode=code", "--cj-version=3"]
     version = cangjie.versions.CANGJIE3
-    language = cangjie.filters.BIG5 | cangjie.filters.HKSCS
