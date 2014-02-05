@@ -26,3 +26,9 @@ class VersionThreeTestCase(BaseTestCase, metaclass=MetaTest):
     cli_options = ["--filter=big5,hkscs,punctuation,chinese,zhuyin,kanji,katakana,hiragana,symbols",
                    "--mode=code", "--cj-version=3"]
     version = cangjie.versions.CANGJIE3
+
+
+class VersionFiveTestCase(BaseTestCase, metaclass=MetaTest):
+    cli_options = ["--filter=big5,hkscs,punctuation,chinese,zhuyin,kanji,katakana,hiragana,symbols",
+                   "--mode=code", "--cj-version=5"]
+    version = cangjie.versions.CANGJIE5
