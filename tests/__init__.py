@@ -62,7 +62,7 @@ class MetaTest(type):
             setattr(cls, "test_%s" % code.replace("*", ""), tester(code))
 
 
-class BaseTestCase:
+class BaseTestCase(unittest.TestCase):
     """Base test class, grouping the common stuff for all our unit tests"""
     def __init__(self, name):
         super().__init__(name)
