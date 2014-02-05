@@ -24,8 +24,6 @@ from tests import BaseTestCase, MetaTest
 
 class VersionThreeBig5HKSCSTestCase(BaseTestCase, unittest.TestCase,
                                     metaclass=MetaTest):
-    # For now, this is the only scenario we can test, as we rely on the
-    # libcangjie_cli tool, and it only implements this
-    # FIXME: Improve libcangjie_cli so we can cover other cases
+    cli_options = ["--filter=big5,hkscs", "--mode=code", "--cj-version=3"]
     version = cangjie.versions.CANGJIE3
     language = cangjie.filters.BIG5 | cangjie.filters.HKSCS

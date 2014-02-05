@@ -64,7 +64,10 @@ class MetaTest(type):
 
 class BaseTestCase:
     """Base test class, grouping the common stuff for all our unit tests"""
-    cli_cmd = ["/usr/bin/libcangjie_cli"]
+    def __init__(self, name):
+        super().__init__(name)
+
+        self.cli_cmd = ["/usr/bin/libcangjie_cli"] + self.cli_options
 
     def setUp(self):
         self.cj = cangjie.Cangjie(self.version, self.language)
