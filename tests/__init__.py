@@ -139,13 +139,15 @@ class BaseTestCase(unittest.TestCase):
 
         expected = []
         for item in tmp_expected:
-            chchar, code, frequency = item.split(", ")
+            chchar, simpchar, code, frequency = item.split(", ")
 
-            chchar = chchar.split(" ")[-1]
-            code = code.split(" ")[-1].strip("'")
+            chchar = chchar.split(": ")[-1].strip("'")
+            simpchar = simpchar.split(": ")[-1].strip("'")
+            code = code.split(": ")[-1].strip("'")
             frequency = int(frequency.split(" ")[-1])
 
             expected.append(cangjie._core.CangjieChar(chchar.encode("utf-8"),
+                                                      simpchar.encode("utf-8"),
                                                       code.encode("utf-8"),
                                                       frequency))
 
