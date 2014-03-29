@@ -47,11 +47,13 @@ cdef extern from "cangjie.h":
 
     cdef struct CCangjieChar "CangjieChar":
         char     chchar[5]
+        char     simpchar[5]
         char     code[6]
         uint32_t frequency
 
     int cangjie_char_new(CCangjieChar **c,
                          char          *chchar,
+                         char          *simpchar,
                          char          *code,
                          uint32_t       frequency)
 

@@ -24,8 +24,8 @@ from .errors import CangjieError, CangjieInvalidInputError, handle_error_code
 cdef class CangjieChar:
     cdef _core.CCangjieChar *cobj
 
-    def __cinit__(self, char *chchar, char *code, uint32_t frequency):
-        ret = <int>_core.cangjie_char_new(&self.cobj, chchar, code,
+    def __cinit__(self, char *chchar, char *simpchar, char *code, uint32_t frequency):
+        ret = <int>_core.cangjie_char_new(&self.cobj, chchar, simpchar, code,
                                           frequency)
 
         handle_error_code(ret, msg="An unknown error happened while "
@@ -35,6 +35,10 @@ cdef class CangjieChar:
     @property
     def chchar(self):
         return self.cobj.chchar.decode("utf-8")
+
+    @property
+    def simpchar(self):
+        return self.cobj.simpchar.decode("utf-8")
 
     @property
     def code(self):
@@ -49,11 +53,12 @@ cdef class CangjieChar:
             _core.cangjie_char_free(self.cobj)
 
     def __str__(self):
-        return ("<CangjieChar chchar='%s', code='%s', frequency='%s'>"
-                % (self.chchar, self.code, self.frequency))
+        return ("<CangjieChar chchar='%s', simpchar='%s', code='%s', frequency='%s'>"
+                % (self.chchar, self.simpchar, self.code, self.frequency))
 
     def __richcmp__(self, other, op):
         equality = (self.chchar == other.chchar
+                and self.simpchar == other.simpchar
                 and self.code == other.code
                 and self.frequency == other.frequency)
 
@@ -79,7 +84,7 @@ cdef class CangjieCharList:
 
         while True:
             c = iter_.c
-            yield CangjieChar(c.chchar, c.code, c.frequency)
+            yield CangjieChar(c.chchar, c.simpchar, c.code, c.frequency)
 
             if iter_.next == NULL:
                 break
