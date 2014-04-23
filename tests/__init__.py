@@ -62,9 +62,20 @@ class MetaTest(type):
             setattr(cls, "test_%s" % code.replace("*", ""), tester(code))
 
 
-class BaseTestCase:
+class BaseTestCase(unittest.TestCase):
     """Base test class, grouping the common stuff for all our unit tests"""
-    cli_cmd = ["/usr/bin/libcangjie_cli"]
+    def __init__(self, name):
+        super().__init__(name)
+
+        self.cli_cmd = ["/usr/bin/libcangjie_cli"] + self.cli_options
+
+        self.language = (cangjie.filters.BIG5 | cangjie.filters.HKSCS |
+                         cangjie.filters.PUNCTUATION |
+                         cangjie.filters.CHINESE |
+                         cangjie.filters.ZHUYIN | cangjie.filters.KANJI |
+                         cangjie.filters.KATAKANA |
+                         cangjie.filters.HIRAGANA |
+                         cangjie.filters.SYMBOLS)
 
     def setUp(self):
         self.cj = cangjie.Cangjie(self.version, self.language)
