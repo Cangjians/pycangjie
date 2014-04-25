@@ -27,6 +27,16 @@ install it with `yum`:
 $ sudo yum install python3-cangjie
 ```
 
+## Gentoo
+
+Pycangjie is included in the Gentoo repositories. It is currently masked.
+You will need to add "dev-python/cangjie" to your /etc/portage/package.accept_keywords 
+or use autounmask. Once unmasked install as root with :
+
+```
+$ emerge dev-python/cangjie
+```
+
 ## Ubuntu 14.04
 
 pycangjie is included in the default Ubuntu repositories, **starting with the
