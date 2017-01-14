@@ -47,3 +47,6 @@ AUTHORS
 
 # Temp editor files
 *.swp
+
+# Temp folder for depending repositories
+tmp
