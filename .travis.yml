@@ -6,7 +6,8 @@ env:
   # prevent local build until issue #30 is resolved on Travis
   # ref: https://github.com/Cangjians/pycangjie/issues/30
   #- TARGET=local
-  - TARGET=docker
+  - TARGET=docker OS=ubuntu-16.04
+  - TARGET=docker OS=fedora-25
 before_install:
   - |
     # install packages for building pycangjie
@@ -25,6 +26,14 @@ before_install:
   - |
     # build the docker image
     if [ "${TARGET}" = "docker" ]; then
+      mkdir tmp
+      sudo docker pull "cangjians/build-essential:${OS}"
+      sudo docker tag "cangjians/build-essential:${OS}" "cangjians/build-essential:latest"
+      echo
+      echo OS=$(sudo docker run -it --rm "cangjians/build-essential:latest" -c "cat /var/version")
+      echo ---------------
+      git clone -b docker https://github.com/Cangjians/libcangjie.git tmp/libcangjie
+      sudo docker build -t "cangjians/libcangjie" tmp/libcangjie/.
       sudo docker build -t "cangjians/pycangjie" .
     else
       echo "skipped";
