@@ -10,9 +10,9 @@ COPY "." "./"
 
 # build the library
 RUN ./autogen.sh --prefix=/usr && \
-  make && make install
-
-# manually adapt to Debian specific dist-packages practice
-RUN export PYTHONPATH=$(python3 -c "import os; print(os.path.dirname(os.__file__))") && \
-  mkdir -p $PYTHONPATH/dist-packages && \
-  ln -s $PYTHONPATH/site-packages/cangjie $PYTHONPATH/dist-packages/.
+  make && \
+  if grep -q ID_LIKE=debian /usr/lib/os-release; then \
+    make install pyexecdir=/usr/lib/python3/dist-packages; \
+  else \
+    make install; \
+  fi
