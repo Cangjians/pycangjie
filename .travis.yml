@@ -3,13 +3,13 @@ sudo: required
 branches:
   only:
     - master
-services:
-  - docker
 env:
   - OS=fedora-latest
   - OS=ubuntu-devel
   - OS=ubuntu-latest
   - OS=ubuntu-lts
+services:
+  - docker
 before_install:
   - sudo apt-get update && sudo apt-get -y install docker-ce
   - docker pull "cangjians/libcangjie:${OS}"
