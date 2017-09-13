@@ -15,6 +15,3 @@ RUN ./autogen.sh --prefix=/usr && \
 RUN export PYTHONPATH=$(python3 -c "import os; print(os.path.dirname(os.__file__))") && \
   mkdir -p $PYTHONPATH/dist-packages && \
   ln -s $PYTHONPATH/site-packages/cangjie $PYTHONPATH/dist-packages/.
-
-ENTRYPOINT []
-CMD ["make", "check", "distcheck"]
