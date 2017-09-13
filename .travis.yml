@@ -22,5 +22,4 @@ before_install:
       sudo docker build -t "cangjians/libcangjie" tmp/libcangjie/.
       sudo docker build -t "cangjians/pycangjie" .
 script:
-  - |
-      sudo docker run -it --rm "cangjians/pycangjie" make check distcheck
+  - docker run -it --rm "cangjians/pycangjie" make distcheck
