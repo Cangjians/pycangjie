@@ -6,9 +6,10 @@ branches:
 services:
   - docker
 env:
-  - OS=ubuntu-16.04
-  - OS=fedora-25
-  - OS=opensuse-leap
+  - OS=fedora-latest
+  - OS=ubuntu-devel
+  - OS=ubuntu-latest
+  - OS=ubuntu-lts
 before_install:
   - |
       mkdir tmp
