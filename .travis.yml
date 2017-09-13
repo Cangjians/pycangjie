@@ -11,15 +11,9 @@ env:
   - OS=ubuntu-latest
   - OS=ubuntu-lts
 before_install:
-  - |
-      mkdir tmp
-      sudo docker pull "cangjians/build-essential:${OS}"
-      sudo docker tag "cangjians/build-essential:${OS}" "cangjians/build-essential:latest"
-      echo
-      echo OS=$(sudo docker run -it --rm "cangjians/build-essential:latest" -c "cat /var/version")
-      echo ---------------
-      git clone -b docker https://github.com/Cangjians/libcangjie.git tmp/libcangjie
-      sudo docker build -t "cangjians/libcangjie" tmp/libcangjie/.
-      sudo docker build -t "cangjians/pycangjie" .
+  - sudo apt-get update && sudo apt-get -y install docker-ce
+  - docker pull "cangjians/libcangjie:${OS}"
+  - docker build --build-arg OS=${OS} --tag "cangjians/pycangjie:${OS}" .
 script:
-  - docker run -it --rm "cangjians/pycangjie" make distcheck
+  - docker run --rm "cangjians/pycangjie:${OS}" bash -c '. /usr/lib/os-release && echo $PRETTY_NAME'
+  - docker run --rm "cangjians/pycangjie:${OS}" make distcheck

@@ -1,4 +1,5 @@
-FROM cangjians/libcangjie:latest
+ARG OS
+FROM cangjians/libcangjie:${OS}
 MAINTAINER Cangjians (https://cangjians.github.io)
 
 # basic environment for building
