@@ -6,30 +6,11 @@ branches:
 services:
   - docker
 env:
-  # prevent local build until issue #30 is resolved on Travis
-  # ref: https://github.com/Cangjians/pycangjie/issues/30
-  #- TARGET=local
-  - TARGET=docker OS=ubuntu-16.04
-  - TARGET=docker OS=fedora-25
-  - TARGET=docker OS=opensuse-leap
+  - OS=ubuntu-16.04
+  - OS=fedora-25
+  - OS=opensuse-leap
 before_install:
   - |
-    # install packages for building pycangjie
-    if [ "${TARGET}" = "local" ]; then
-      sudo apt-get update
-
-      # First install libcangjie
-      sudo apt-get install libsqlite3-dev
-      git clone git://github.com/Cangjians/libcangjie
-      cd libcangjie && git checkout master && ./autogen.sh --prefix=/usr && make && sudo make install && cd ..
-      git clean -dfx
-      sudo apt-get install python3-dev cython
-    else
-      echo "skipped"
-    fi
-  - |
-    # build the docker image
-    if [ "${TARGET}" = "docker" ]; then
       mkdir tmp
       sudo docker pull "cangjians/build-essential:${OS}"
       sudo docker tag "cangjians/build-essential:${OS}" "cangjians/build-essential:latest"
@@ -39,21 +20,6 @@ before_install:
       git clone -b docker https://github.com/Cangjians/libcangjie.git tmp/libcangjie
       sudo docker build -t "cangjians/libcangjie" tmp/libcangjie/.
       sudo docker build -t "cangjians/pycangjie" .
-    else
-      echo "skipped";
-    fi
 script:
   - |
-    # build pycangjie
-    if [ "${TARGET}" = "local" ]; then
-      ./autogen.sh && make && make check && make distcheck
-    else
-      echo "skipped";
-    fi
-  - |
-    # test pycangjie in docker
-    if [ "${TARGET}" = "docker" ]; then
       sudo docker run -it --rm "cangjians/pycangjie" make check distcheck
-    else
-      echo "skipped";
-    fi
