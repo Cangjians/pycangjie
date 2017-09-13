@@ -1,0 +1,52 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.pyc
+*.pyo
+
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# Generated source code
+*.c
+
+# Autotools stuff
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+config.guess
+config.h
+config.h.in
+config.log
+config.status
+config.sub
+configure
+depcomp
+install-sh
+libtool
+ltmain.sh
+m4
+missing
+py-compile
+stamp-h1
+test-driver
+test-suite.log
+tests/*.log
+tests/*.trs
+tests/run_tests
+.deps
+.libs
+AUTHORS
+
+# Temp editor files
+*.swp
+
+# Temp folder for depending repositories
+tmp
