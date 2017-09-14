@@ -1,3 +1,13 @@
+# pycangjie
+
+[![travis-shield]][travis-url]
+[![license-shield]][license-url]
+
+[travis-url]: https://travis-ci.org/Cangjians/pycangjie
+[travis-shield]: https://api.travis-ci.org/Cangjians/pycangjie.svg?branch=master
+[license-url]: http://www.gnu.org/licenses/lgpl.html
+[license-shield]: https://img.shields.io/github/license/cangjians/pycangjie.svg
+
 This is a Python wrapper to libcangjie, the library implementing the Cangjie
 input method.
 
