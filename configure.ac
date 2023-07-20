@@ -38,7 +38,8 @@ CYTHON_MIN_VERSION=0.14
 AC_MSG_CHECKING(for cython version)
 CYTHON_VERSION=`$CYTHON --version 2>&1 | cut -d" " -f3`
 AC_MSG_RESULT($CYTHON_VERSION)
-$PYTHON -c "from distutils.version import StrictVersion as ver; import sys; sys.exit(0 if ver(\"$CYTHON_VERSION\") >= ver(\"$CYTHON_MIN_VERSION\") else 1)"
+# Version is strict. See: https://github.com/pypa/packaging/issues/520#issuecomment-1067119795
+$PYTHON -c "from packaging.version import Version as ver; import sys; sys.exit(0 if ver(\"$CYTHON_VERSION\") >= ver(\"$CYTHON_MIN_VERSION\") else 1)"
 AS_IF([test $? = 1], [AC_MSG_ERROR([Please use cython >= $CYTHON_MIN_VERSION])])
 
 AC_SUBST(CYTHON)
