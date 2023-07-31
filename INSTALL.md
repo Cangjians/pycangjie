@@ -63,6 +63,7 @@ To build these bindings, you will need the following:
 
 * Python >= 3.2
 * Cython >= 0.17
+* the Meson build system
 * a C compiler and library (we recommend GCC and the GNU C library)
 * the libcangjie library and development headers
 
@@ -72,12 +73,12 @@ Download a release tarball from
 [the download section](http://cangjians.github.io/downloads/pycangjie/) of
 our website.
 
-From the root folder of the unpacked tarball, do the usual Autotools dance:
+From the root folder of the unpacked tarball, do the usual Meson dance:
 
 ```
-$ ./configure
-$ make
-$ sudo make install
+$ meson setup builddir/
+$ ninja -C builddir/
+$ meson install -C builddir/
 ```
 
 ### Install from Git
@@ -88,10 +89,10 @@ First, you need to clone the development repository:
 $ git clone git://github.com/Cangjians/pycangjie
 ```
 
-Then, from the root folder of the Git clone, do the usual Autotools dance:
+Then, from the root folder of the Git clone, do the usual Meson dance:
 
 ```
-$ ./autogen.sh
-$ make
-$ sudo make install
+$ meson setup builddir/
+$ ninja -C builddir/
+$ meson install -C builddir/
 ```
